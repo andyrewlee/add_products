@@ -1,0 +1,37 @@
+#container {
+    width: 900px;
+    margin: 0 auto;
+}
+label {
+    width: 120px;
+    display: inline-block;
+}
+input[type='submit'] {
+    margin-left: 190px;
+    width: 100px;
+    background-color: #3399FF;
+    color: white;
+    padding: 5px;
+    border: none;
+    border-radius: 3px;
+}
+input {
+    width: 158px;
+}
+textarea {
+    vertical-align: top;
+    height: 100px;
+}
+#product_listing h2 {
+    margin-top: 50px;
+}
+th {
+    text-align: left;
+}
+td, th {
+    border: 1px solid black;
+    padding: 0 10px;
+}
+table {
+    border-collapse: collapse;
+}
