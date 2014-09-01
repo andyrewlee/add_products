@@ -1,7 +1,7 @@
 <?php
 
-class Product extends DataMapper {
-    public $has_one = array('manufacturer');
+class Manufacturer extends DataMapper {
+    public $has_many = array('product');
 
     function __contruct($id = NULL)
     {
