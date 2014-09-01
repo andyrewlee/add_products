@@ -25,10 +25,10 @@ class Products extends CI_Controller {
     public function add()
     {
         $post_data = $this->input->post();
-
+      
         $manufacturer = new Manufacturer();
         $this_manufacturer = $manufacturer->where('name', $post_data["manufacturer"])->get()->all_to_array();
-
+      
         $product = new Product();
         $product->manufacturer_id = $this_manufacturer[0]['id'];
         $product->name = $post_data['product_name'];
@@ -36,14 +36,36 @@ class Products extends CI_Controller {
         $product->description = $post_data['description'];
         $product->save();
         redirect('/products/index');
+    }
+    public function update($id)
+    {
+        $update_data = $this->input->post();
 
+        $manufacturer = new Manufacturer();
+        $this_manufacturer = $manufacturer->where('name', $update_data["manufacturer"])->get()->all_to_array();
+
+        $product = new Product($id);
+        $product->manufacturer_id = $this_manufacturer[0]['id'];
+        $product->name = $update_data['product_name'];
+        $product->price = $update_data['price'];
+        $product->description = $update_data['description'];
+        $product->save();
+        redirect('/products/index');   
     }
     public function show($id)
     {
         $product = new Product($id);
+        $manufacturer = new Manufacturer();
         $this_product = $product->all_to_array();
+        
+        $manufacturer_info = $manufacturer->where('id', $this_product[0]['manufacturer_id'])->get()->all_to_array();
+        $this_manufacturer = $manufacturer_info[0];
         $show_product = $this_product[0];
-        $output["show_product"] = $show_product;
+
+        $output = array();
+        $output['manufacturer'] = $this_manufacturer;
+        $output['product'] = $show_product;
+      
         $this->load->view('products_show', $output);
     }
 
